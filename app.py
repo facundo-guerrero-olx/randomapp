@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def get():
-    return requests.get('http://nginx.facu.svc.cluster.local').text
+    return "Nginx say: {}".format(requests.get('http://nginx.facu.svc.cluster.local').status_code)
 
 
 
