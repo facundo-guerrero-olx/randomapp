@@ -23,6 +23,8 @@ def getForwardHeaders(request):
             headers[ihdr] = val
             #print "incoming: "+ihdr+":"+val
 
+    print ("Response Headers")
+    print (headers)
     return headers
 
 
