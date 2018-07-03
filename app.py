@@ -30,7 +30,7 @@ def getForwardHeaders(request):
 def get():
     print(request.headers)
     headers = getForwardHeaders(request)
-    return "Nginx say: {}".format(requests.get('http://nginx.facu.svc.cluster.local').status_code, headers=headers)
+    return "Nginx say: {}".format(requests.get('http://nginx').status_code, headers=headers)
 
 
 
