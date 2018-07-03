@@ -5,12 +5,32 @@ from flask import Flask, request
 app = Flask(__name__)
 
 
+def getForwardHeaders(request):
+    headers = {}
+
+    incoming_headers = [ 'x-request-id',
+                         'x-b3-traceid',
+                         'x-b3-spanid',
+                         'x-b3-parentspanid',
+                         'x-b3-sampled',
+                         'x-b3-flags',
+                         'x-ot-span-context'
+    ]
+
+    for ihdr in incoming_headers:
+        val = request.headers.get(ihdr)
+        if val is not None:
+            headers[ihdr] = val
+            #print "incoming: "+ihdr+":"+val
+
+    return headers
 
 
 @app.route('/')
 def get():
     print(request.headers)
-    return "Nginx say: {}".format(requests.get('http://nginx.facu.svc.cluster.local').status_code)
+    headers = getForwardHeaders(request)
+    return "Nginx say: {}".format(requests.get('http://nginx.facu.svc.cluster.local').status_code, headers=headers)
 
 
 
