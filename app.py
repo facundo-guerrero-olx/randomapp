@@ -1,5 +1,5 @@
 import requests
-from flask import Flask, request
+from flask import Flask, request, Response
 
 
 app = Flask(__name__)
@@ -37,7 +37,10 @@ def get():
       destiny = request.headers.get('olx-destiny')
 
     print('going to http GET ', destiny)
-    return "Nginx say: {}".format(requests.get('http://'+destiny, headers=headers).status_code)
+    resp = Response("{} say: {}".format(destiny, requests.get('http://'+destiny, headers=headers).status_code))
+    resp.headers.extend(headers)
+    print("Response headers ", resp.headers)
+    return resp
 
 
 
