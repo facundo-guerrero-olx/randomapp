@@ -23,7 +23,7 @@ def getForwardHeaders(request):
             headers[ihdr] = val
             #print "incoming: "+ihdr+":"+val
 
-    print ("Response Headers")
+    print ("Request Headers")
     print (headers)
     return headers
 
@@ -32,7 +32,7 @@ def getForwardHeaders(request):
 def get():
     print(request.headers)
     headers = getForwardHeaders(request)
-    return "Nginx say: {}".format(requests.get('http://nginx').status_code, headers=headers)
+    return "Nginx say: {}".format(requests.get('http://nginx', headers=headers).status_code)
 
 
 
