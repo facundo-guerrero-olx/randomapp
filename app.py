@@ -30,9 +30,14 @@ def getForwardHeaders(request):
 
 @app.route('/')
 def get():
-    print(request.headers)
+    print(request.headers.get('olx-destiny'))
     headers = getForwardHeaders(request)
-    return "Nginx say: {}".format(requests.get('http://nginx', headers=headers).status_code)
+    destiny = 'nginx'
+    if request.headers.get('olx-destiny') is not None:
+      destiny = request.headers.get('olx-destiny')
+
+    print('going to http GET ', destiny)
+    return "Nginx say: {}".format(requests.get('http://'+destiny, headers=headers).status_code)
 
 
 
