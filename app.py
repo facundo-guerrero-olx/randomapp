@@ -36,7 +36,7 @@ def get_ok():
 def get():
     print(request.headers.get('olx-destiny'))
     headers = getForwardHeaders(request)
-    destiny = 'nginx'
+    destiny = 'nginx:5000'
     if request.headers.get('olx-destiny') is not None:
       destiny = request.headers.get('olx-destiny')
 
