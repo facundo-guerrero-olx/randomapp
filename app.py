@@ -27,6 +27,10 @@ def getForwardHeaders(request):
     print (headers)
     return headers
 
+@app.route('/ok')
+def get_ok():
+    return "OK"
+
 
 @app.route('/')
 def get():
@@ -37,7 +41,7 @@ def get():
       destiny = request.headers.get('olx-destiny')
 
     print('going to http GET ', destiny)
-    resp = Response("{} say: {}".format(destiny, requests.get('http://'+destiny, headers=headers).status_code))
+    resp = Response("{} say: {}".format(destiny, requests.get('http://{}/ok'.format(destiny), headers=headers).status_code))
     resp.headers.extend(headers)
     print("Response headers ", resp.headers)
     return resp
